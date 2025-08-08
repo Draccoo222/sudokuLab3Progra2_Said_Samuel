@@ -138,6 +138,16 @@ public class ModeloSudoku {
         }
         return true;
     }
+    
+public boolean isComplete() {
+    for (int f = 0; f < 9; f++) {
+        for (int c = 0; c < 9; c++) {
+            if (tablero[f][c] == 0) return false;
+        }
+    }
+    return true;
+}
+
 
     private boolean esValidoEnTablero(int[][] puzzle, int f, int c, int v) {
         for (int i = 0; i < 9; i++) {

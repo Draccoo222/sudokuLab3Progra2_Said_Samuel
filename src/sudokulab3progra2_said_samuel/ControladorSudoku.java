@@ -67,22 +67,36 @@ public class ControladorSudoku {
     public JPanel obtenerPanelLateral() { return panelLateral; }
 
     private void ingresarNumero(int v) {
-        if (filaSel < 0 || colSel < 0 || contErrores >= MAX_ERRORES) return;
-        if (modelo.esValido(filaSel, colSel, v)) {
-            modelo.asignar(filaSel, colSel, v);
-        } else {
-            contErrores++;
-            etiquetaErrores.setText("Errores: " + contErrores + "/" + MAX_ERRORES);
-            if (contErrores >= MAX_ERRORES) {
-                JOptionPane.showMessageDialog(null, "Límite de errores. Nuevo juego.");
-                reiniciarJuego();
-                return;
-            } else {
-                JOptionPane.showMessageDialog(null, "Error. Quedan " + (MAX_ERRORES - contErrores) + " intentos.");
-            }
+    if (filaSel < 0 || colSel < 0 || contErrores >= MAX_ERRORES) return;
+
+    boolean ok = modelo.asignar(filaSel, colSel, v);
+    if (ok) {
+        if (modelo.isComplete()) {
+            JOptionPane.showMessageDialog(
+                vista,
+                "¡Felicitaciones, ganaste, grande Inge Erick!",
+                "¡Victoria!",
+                JOptionPane.INFORMATION_MESSAGE
+            );
         }
-        refrescarVista();
+    } else {
+        contErrores++;
+        etiquetaErrores.setText("Errores: " + contErrores + "/" + MAX_ERRORES);
+        if (contErrores >= MAX_ERRORES) {
+            JOptionPane.showMessageDialog(null, "Límite de errores. Nuevo juego.");
+            reiniciarJuego();
+            return;
+        } else {
+            JOptionPane.showMessageDialog(
+                null,
+                "Error. Quedan " + (MAX_ERRORES - contErrores) + " intentos."
+            );
+        }
     }
+
+    refrescarVista();
+}
+
 
     private void reiniciarJuego() {
         contErrores = 0;
