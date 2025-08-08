@@ -63,4 +63,3 @@ public class VistaSudoku extends JPanel {
     public interface OyenteCelda { void celdaSeleccionada(int fila, int col); }
 }
 
-

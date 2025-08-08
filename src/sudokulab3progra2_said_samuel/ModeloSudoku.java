@@ -1,6 +1,9 @@
 package sudokulab3progra2_said_samuel;
 
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class ModeloSudoku {
     private int[][] tablero = new int[9][9];
@@ -49,7 +52,7 @@ public class ModeloSudoku {
     private boolean rellenarRecursivo(int f, int c) {
         if (f == 9) return true;
         int nf = (c == 8 ? f + 1 : f), nc = (c == 8 ? 0 : c + 1);
-        List<Integer> nums = new ArrayList<>();
+        ArrayList<Integer> nums = new ArrayList<>();
         for (int i = 1; i <= 9; i++) nums.add(i);
         Collections.shuffle(nums);
         for (int v : nums) {
@@ -117,4 +120,3 @@ public class ModeloSudoku {
         return copia;
     }
 }
-
